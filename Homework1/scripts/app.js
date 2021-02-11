@@ -101,10 +101,15 @@ function printUsers() {
   }
 }
 
+function cleanInput() {
+  searchInput.value = "";
+}
+
 printUsers();
 
 searchBtn.addEventListener("click", () => {
   searchUser(searchInput.value);
+  cleanInput();
 });
 
 resetBtn.addEventListener("click", () => {
