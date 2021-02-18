@@ -43,6 +43,7 @@ let usersData = [
   new User("Bjorn", "Larsen", 31, "Oslo", "Norway", "Astrid Larsen", ["Einar"]),
 ];
 
+// [Functions]
 function checkMarriage(user) {
   if (user.isMarried) {
     return "Yes";
@@ -52,18 +53,12 @@ function checkMarriage(user) {
 }
 
 function searchUser(input) {
-  tableContainer.innerHTML = `<thead><td>First Name</td>
-    <td>Last Name</td>
-    <td>Full Name</td>
-    <td>Age</td>
-    <td>City</td>
-    <td>Country</td>
-    <td>Spouse</td>
-    <td>Pets</td>
-    <td>Marriage Status</td>
-    </thead>`;
+  tableContainer.innerHTML = "";
   for (const user of usersData) {
-    if (input.toLowerCase() === user.fullName.toLowerCase()) {
+    if (
+      input.toLowerCase() === user.fullName.toLowerCase() ||
+      parseInt(input) === parseInt(user.age)
+    ) {
       tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
         <td>${user.lastName}</td>
         <td>${user.fullName}</td>
@@ -78,16 +73,7 @@ function searchUser(input) {
 }
 
 function printUsers() {
-  tableContainer.innerHTML = `<thead><td>First Name</td>
-    <td>Last Name</td>
-    <td>Full Name</td>
-    <td>Age</td>
-    <td>City</td>
-    <td>Country</td>
-    <td>Spouse</td>
-    <td>Pets</td>
-    <td>Marriage Status</td>
-    </thead>`;
+  tableContainer.innerHTML = "";
   for (const user of usersData) {
     tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
     <td>${user.lastName}</td>
@@ -112,6 +98,4 @@ searchBtn.addEventListener("click", () => {
   cleanInput();
 });
 
-resetBtn.addEventListener("click", () => {
-  printUsers();
-});
+resetBtn.addEventListener("click", () => printUsers());

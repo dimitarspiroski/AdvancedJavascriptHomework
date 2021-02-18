@@ -15,14 +15,23 @@
   </head>
   <body>
     <div>
-      <table id="table-container" class="table table-dark table-hover"></table>
+      <table id="table" class="table table-dark table-hover">
+        <thead>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Spouse</th>
+          <th>Pets</th>
+          <th>Marriage Status</th>
+        </thead>
+        <tbody id="table-container"></tbody>
+      </table>
     </div>
     <label for="search-input">Search User:</label>
-    <input
-      type="text"
-      id="search-input"
-      placeholder="Please enter a full name"
-    />
+    <input type="text" id="search-input" placeholder="Please enter age:" />
     <button type="button" id="search-btn" class="btn btn-dark">Search</button>
     <button type="button" id="reset-btn" class="btn btn-dark">Reset</button>
     <script
