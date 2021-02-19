@@ -1,0 +1,19 @@
+body {
+  background-color: #323539;
+}
+label {
+  margin: 5px;
+  color: white;
+}
+button {
+  margin: 5px;
+}
+
+#form-section {
+  width: 500px;
+  margin-left: 10px;
+}
+
+p {
+  color: #ffffff;
+}
