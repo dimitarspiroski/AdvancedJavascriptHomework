@@ -1,0 +1,35 @@
+body {
+  background-color: #323539;
+}
+label {
+  margin: 5px;
+  color: white;
+}
+button {
+  margin: 5px;
+}
+
+#form-section {
+  width: 500px;
+  margin-left: 10px;
+}
+
+p {
+  color: #ffffff;
+}
+
+#remove {
+  transition: 0ms;
+  color: rgb(128, 128, 128);
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+  margin-left: 23px;
+}
+
+#remove:hover {
+  color: #fff;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+  margin-left: 23px;
+  transition-delay: 0.3s;
+}

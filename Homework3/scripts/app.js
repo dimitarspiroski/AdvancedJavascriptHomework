@@ -107,7 +107,10 @@ function searchUser(input) {
         <td>${user.country}</td>
         <td>${user.spouse}</td>
         <td>${user.pets}</td>
-        <td>${checkMarriage(user)}</td></tr>`;
+        <td>${checkMarriage(user)}</td>
+        <td><span id="remove">X</span></td>
+        </tr>;
+        `;
     }
   }
 }
@@ -124,6 +127,7 @@ function printUsers() {
     <td>${user.spouse}</td>
     <td>${user.pets}</td>
     <td>${checkMarriage(user)}</td>
+    <td><span id="remove">X</span></td>
     </tr>`;
   }
 }
