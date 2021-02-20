@@ -15,7 +15,7 @@ const errorMessage = document.querySelector("#error-message");
 const formPage = document.querySelector("#form-section");
 const tablePage = document.querySelector("#table-section");
 const headerLinks = Array.from(document.querySelectorAll(".nav-link"));
-console.log(petsInput);
+
 // [Constructor]
 function User(firstName, lastName, age, city, country, spouse, pets) {
   this.firstName = firstName;
@@ -54,6 +54,26 @@ let usersData = [
   new User("Kai", "Sato", 18, "Tokyo", "Japan", "", []),
   new User("Bjorn", "Larsen", 31, "Oslo", "Norway", "Astrid Larsen", ["Einar"]),
 ];
+
+const inputData = [
+  searchInput,
+  firstNameInput,
+  lastNameInput,
+  ageInput,
+  cityInput,
+  countryInput,
+  spouseInput,
+  petsInput,
+];
+
+const requiredInputs = [
+  firstNameInput,
+  lastNameInput,
+  ageInput,
+  cityInput,
+  countryInput,
+];
+
 // [Functions]
 function defaultPage() {
   formPage.style.display = "block";
@@ -63,15 +83,8 @@ function defaultPage() {
 }
 
 function inputValidation() {
-  const formInputs = [
-    firstNameInput.value,
-    lastNameInput.value,
-    ageInput.value,
-    cityInput.value,
-    countryInput.value,
-  ];
-  for (let input of formInputs) {
-    if (!input) {
+  for (let input of requiredInputs) {
+    if (!input.value) {
       return false;
     }
   }
@@ -129,14 +142,9 @@ function printUsers() {
 }
 
 function cleanInput() {
-  searchInput.value = "";
-  firstNameInput.value = "";
-  lastNameInput.value = "";
-  ageInput.value = "";
-  cityInput.value = "";
-  countryInput.value = "";
-  spouseInput.value = "";
-  petsInput.value = "";
+  inputData.forEach((element) => {
+    element.value = "";
+  });
 }
 
 // [Event Handlers]
@@ -159,12 +167,12 @@ submitButton.addEventListener("click", () => {
       spouseInput.value,
       Array.from(petsInput.selectedOptions)
         .map((element) => element.value)
-        .join(", ")
+        .join()
     );
+    cleanInput();
   } else {
     errorMessage.innerHTML = "Please fill all the required information!";
   }
-  cleanInput();
 });
 headerLinks[0].addEventListener("click", () => {
   formPage.style.display = "block";
