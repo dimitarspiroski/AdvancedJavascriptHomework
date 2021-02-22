@@ -15,7 +15,7 @@ const errorMessage = document.querySelector("#error-message");
 const formPage = document.querySelector("#form-section");
 const tablePage = document.querySelector("#table-section");
 const headerLinks = Array.from(document.querySelectorAll(".nav-link"));
-console.log(petsInput);
+
 // [Constructor]
 function User(firstName, lastName, age, city, country, spouse, pets) {
   this.firstName = firstName;
@@ -34,6 +34,7 @@ function User(firstName, lastName, age, city, country, spouse, pets) {
     }
   };
   this.checkIfMarried();
+  this.userID = Math.floor(Math.random() * 8999 + 1000);
 }
 
 // [Data]
@@ -54,6 +55,26 @@ let usersData = [
   new User("Kai", "Sato", 18, "Tokyo", "Japan", "", []),
   new User("Bjorn", "Larsen", 31, "Oslo", "Norway", "Astrid Larsen", ["Einar"]),
 ];
+
+const inputData = [
+  searchInput,
+  firstNameInput,
+  lastNameInput,
+  ageInput,
+  cityInput,
+  countryInput,
+  spouseInput,
+  petsInput,
+];
+
+const requiredInputs = [
+  firstNameInput,
+  lastNameInput,
+  ageInput,
+  cityInput,
+  countryInput,
+];
+
 // [Functions]
 function defaultPage() {
   formPage.style.display = "block";
@@ -63,15 +84,8 @@ function defaultPage() {
 }
 
 function inputValidation() {
-  const formInputs = [
-    firstNameInput.value,
-    lastNameInput.value,
-    ageInput.value,
-    cityInput.value,
-    countryInput.value,
-  ];
-  for (let input of formInputs) {
-    if (!input) {
+  for (let input of requiredInputs) {
+    if (!input.value) {
       return false;
     }
   }
@@ -89,35 +103,43 @@ function checkMarriage(user) {
 function createUser(firstName, lastName, age, city, country, spouse, pets) {
   const user = new User(firstName, lastName, age, city, country, spouse, pets);
   usersData.push(user);
-  printUsers();
+  printUsers(usersData);
 }
 
 function searchUser(input) {
   tableContainer.innerHTML = "";
-  for (const user of usersData) {
+  usersData.forEach((user) => {
     if (
       input.toLowerCase() === user.fullName.toLowerCase() ||
-      parseInt(input) === parseInt(user.age)
+      input === user.userID
     ) {
       tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
-        <td>${user.lastName}</td>
-        <td>${user.fullName}</td>
-        <td>${user.age}</td>
-        <td>${user.city}</td>
-        <td>${user.country}</td>
-        <td>${user.spouse}</td>
-        <td>${user.pets}</td>
-        <td>${checkMarriage(user)}</td>
-        <td><span id="remove">X</span></td>
-        </tr>;
-        `;
+      <td>${user.lastName}</td>
+      <td>${user.fullName}</td>
+      <td>${user.age}</td>
+      <td>${user.city}</td>
+      <td>${user.country}</td>
+      <td>${user.spouse}</td>
+      <td>${user.pets}</td>
+      <td>${checkMarriage(user)}</td>
+      <td>${user.userID}</td>
+      <td><span class="remove">X</span></td>
+      </tr>`;
+      const foundUserIndex = usersData.findIndex((element) => element === user);
+      const removeButton = Array.from(document.querySelectorAll(".remove"));
+      removeButton.forEach((button) => {
+        button.addEventListener("click", () => {
+          usersData.splice(foundUserIndex, 1);
+          printUsers(usersData);
+        });
+      });
     }
-  }
+  });
 }
 
-function printUsers() {
+function printUsers(dataArray) {
   tableContainer.innerHTML = "";
-  for (const user of usersData) {
+  dataArray.forEach((user) => {
     tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
     <td>${user.lastName}</td>
     <td>${user.fullName}</td>
@@ -127,20 +149,23 @@ function printUsers() {
     <td>${user.spouse}</td>
     <td>${user.pets}</td>
     <td>${checkMarriage(user)}</td>
-    <td><span id="remove">X</span></td>
+    <td>${user.userID}</td>
+    <td><span class="remove">X</span></td>
     </tr>`;
-  }
+    const removeButton = Array.from(document.querySelectorAll(".remove"));
+    removeButton.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        dataArray.splice(index, 1);
+        printUsers(usersData);
+      });
+    });
+  });
 }
 
 function cleanInput() {
-  searchInput.value = "";
-  firstNameInput.value = "";
-  lastNameInput.value = "";
-  ageInput.value = "";
-  cityInput.value = "";
-  countryInput.value = "";
-  spouseInput.value = "";
-  petsInput.value = "";
+  inputData.forEach((element) => {
+    element.value = "";
+  });
 }
 
 // [Event Handlers]
@@ -149,7 +174,7 @@ searchBtn.addEventListener("click", () => {
   cleanInput();
 });
 
-resetBtn.addEventListener("click", () => printUsers());
+resetBtn.addEventListener("click", () => printUsers(usersData));
 
 submitButton.addEventListener("click", () => {
   if (inputValidation()) {
@@ -163,12 +188,12 @@ submitButton.addEventListener("click", () => {
       spouseInput.value,
       Array.from(petsInput.selectedOptions)
         .map((element) => element.value)
-        .join(", ")
+        .join()
     );
+    cleanInput();
   } else {
     errorMessage.innerHTML = "Please fill all the required information!";
   }
-  cleanInput();
 });
 headerLinks[0].addEventListener("click", () => {
   formPage.style.display = "block";
@@ -186,5 +211,5 @@ headerLinks[1].addEventListener("click", () => {
 // [Initialization]
 (() => {
   defaultPage();
-  printUsers();
+  printUsers(usersData);
 })();
