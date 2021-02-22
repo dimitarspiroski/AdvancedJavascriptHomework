@@ -34,3 +34,7 @@ p {
   margin-left: 23px;
   transition: 0.2s ease-in-out;
 }
+
+#search-input {
+  width: 250px;
+}

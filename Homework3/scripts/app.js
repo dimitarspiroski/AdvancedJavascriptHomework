@@ -111,7 +111,7 @@ function searchUser(input) {
   usersData.forEach((user) => {
     if (
       input.toLowerCase() === user.fullName.toLowerCase() ||
-      input === user.userID
+      parseInt(input) === parseInt(user.userID)
     ) {
       tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
       <td>${user.lastName}</td>
