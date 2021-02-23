@@ -108,7 +108,7 @@ function createUser(firstName, lastName, age, city, country, spouse, pets) {
 
 function searchUser(input) {
   tableContainer.innerHTML = "";
-  usersData.forEach((user) => {
+  usersData.forEach(user => {
     if (
       input.toLowerCase() === user.fullName.toLowerCase() ||
       parseInt(input) === parseInt(user.userID)
@@ -125,21 +125,14 @@ function searchUser(input) {
       <td>${user.userID}</td>
       <td><span class="remove">X</span></td>
       </tr>`;
-      const foundUserIndex = usersData.findIndex((element) => element === user);
-      const removeButton = Array.from(document.querySelectorAll(".remove"));
-      removeButton.forEach((button) => {
-        button.addEventListener("click", () => {
-          usersData.splice(foundUserIndex, 1);
-          printUsers(usersData);
-        });
-      });
+      deleteFoundUser(usersData, user);
     }
   });
 }
 
 function printUsers(dataArray) {
   tableContainer.innerHTML = "";
-  dataArray.forEach((user) => {
+  dataArray.forEach(user => {
     tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
     <td>${user.lastName}</td>
     <td>${user.fullName}</td>
@@ -152,18 +145,33 @@ function printUsers(dataArray) {
     <td>${user.userID}</td>
     <td><span class="remove">X</span></td>
     </tr>`;
-    const removeButton = Array.from(document.querySelectorAll(".remove"));
-    removeButton.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        dataArray.splice(index, 1);
-        printUsers(usersData);
-      });
+    deleteUser(usersData);
+  });
+}
+
+function deleteUser(dataArray) {
+  const removeButton = Array.from(document.querySelectorAll(".remove"));
+  removeButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      dataArray.splice(index, 1);
+      printUsers(dataArray);
+    });
+  });
+}
+
+function deleteFoundUser(dataArray, user) {
+  const foundUserIndex = dataArray.findIndex(element => element === user);
+  const removeButton = Array.from(document.querySelectorAll(".remove"));
+  removeButton.forEach(button => {
+    button.addEventListener("click", () => {
+      dataArray.splice(foundUserIndex, 1);
+      printUsers(dataArray);
     });
   });
 }
 
 function cleanInput() {
-  inputData.forEach((element) => {
+  inputData.forEach(element => {
     element.value = "";
   });
 }
@@ -187,7 +195,7 @@ submitButton.addEventListener("click", () => {
       countryInput.value,
       spouseInput.value,
       Array.from(petsInput.selectedOptions)
-        .map((element) => element.value)
+        .map(element => element.value)
         .join()
     );
     cleanInput();
