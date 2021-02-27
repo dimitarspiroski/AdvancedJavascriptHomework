@@ -106,6 +106,25 @@ function createUser(firstName, lastName, age, city, country, spouse, pets) {
   printUsers(usersData);
 }
 
+function printUsers(dataArray) {
+  tableContainer.innerHTML = "";
+  dataArray.forEach(user => {
+    tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
+    <td>${user.lastName}</td>
+    <td>${user.fullName}</td>
+    <td>${user.age}</td>
+    <td>${user.city}</td>
+    <td>${user.country}</td>
+    <td>${user.spouse}</td>
+    <td>${user.pets}</td>
+    <td>${checkMarriage(user)}</td>
+    <td>${user.userID}</td>
+    <td><span class="remove">X</span></td>
+    </tr>`;
+    deleteUser(usersData, null);
+  });
+}
+
 function searchUser(input) {
   tableContainer.innerHTML = "";
   usersData.forEach(user => {
@@ -125,46 +144,21 @@ function searchUser(input) {
       <td>${user.userID}</td>
       <td><span class="remove">X</span></td>
       </tr>`;
-      deleteFoundUser(usersData, user);
+      const foundUserIndex = usersData.findIndex(element => element === user);
+      deleteUser(usersData, foundUserIndex);
     }
   });
 }
 
-function printUsers(dataArray) {
-  tableContainer.innerHTML = "";
-  dataArray.forEach(user => {
-    tableContainer.innerHTML += `<tr><td>${user.firstName}</td>
-    <td>${user.lastName}</td>
-    <td>${user.fullName}</td>
-    <td>${user.age}</td>
-    <td>${user.city}</td>
-    <td>${user.country}</td>
-    <td>${user.spouse}</td>
-    <td>${user.pets}</td>
-    <td>${checkMarriage(user)}</td>
-    <td>${user.userID}</td>
-    <td><span class="remove">X</span></td>
-    </tr>`;
-    deleteUser(usersData);
-  });
-}
-
-function deleteUser(dataArray) {
+function deleteUser(dataArray, foundIndex) {
   const removeButton = Array.from(document.querySelectorAll(".remove"));
   removeButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      dataArray.splice(index, 1);
-      printUsers(dataArray);
-    });
-  });
-}
-
-function deleteFoundUser(dataArray, user) {
-  const foundUserIndex = dataArray.findIndex(element => element === user);
-  const removeButton = Array.from(document.querySelectorAll(".remove"));
-  removeButton.forEach(button => {
-    button.addEventListener("click", () => {
-      dataArray.splice(foundUserIndex, 1);
+      if (!foundIndex) {
+        dataArray.splice(index, 1);
+      } else {
+        dataArray.splice(foundIndex, 1);
+      }
       printUsers(dataArray);
     });
   });
