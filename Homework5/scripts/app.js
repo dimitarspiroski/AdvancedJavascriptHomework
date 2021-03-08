@@ -59,7 +59,7 @@ let usersData = [
   new User("Bjorn", "Larsen", 31, "Oslo", "Norway", "Astrid Larsen", ["Einar"]),
 ];
 
-let originalUsersData = usersData.slice();
+let usersDataCopy = usersData.slice();
 
 const inputData = [
   searchInput,
@@ -82,6 +82,7 @@ const requiredInputs = [
 
 let editIndex = null;
 let isEditing = false;
+// let sortReset = false;
 
 // [Functions]
 function defaultPage() {
@@ -119,7 +120,7 @@ function createUser(firstName, lastName, age, city, country, spouse, pets) {
     pets
   );
   usersData.push(newUser);
-  originalUsersData.push(newUser);
+  usersDataCopy.push(newUser);
   printUsers(usersData);
 }
 
@@ -143,9 +144,6 @@ function printUsers(dataArray) {
   });
 }
 
-function sortUsers(dataArray) {
-  dataArray.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
-}
 function searchUser(input) {
   tableContainer.innerHTML = "";
   usersData.forEach(user => {
@@ -243,7 +241,10 @@ descendBtn.addEventListener("click", () => {
   printUsers(usersData);
 });
 
-resetSortBtn.addEventListener("click", () => printUsers(originalUsersData));
+resetSortBtn.addEventListener("click", () => {
+  // sortReset = true;
+  printUsers(usersDataCopy);
+});
 
 submitButton.addEventListener("click", () => {
   if (inputValidation()) {
@@ -261,6 +262,11 @@ submitButton.addEventListener("click", () => {
           .join()
       );
       cleanInput();
+      // } else if (sortReset && isEditing) {
+      //   editUser(usersDataCopy);
+      //   isEditing = false;
+      //   sortReset = false;
+      //   cleanInput();}
     } else {
       editUser(usersData);
       isEditing = false;
