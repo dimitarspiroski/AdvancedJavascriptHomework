@@ -187,6 +187,8 @@ function editUserButtons(dataArray) {
 function editUser(dataArray) {
   dataArray[editIndex].firstName = firstNameInput.value;
   dataArray[editIndex].lastName = lastNameInput.value;
+  dataArray[editIndex].fullName =
+    firstNameInput.value + " " + lastNameInput.value;
   dataArray[editIndex].age = ageInput.value;
   dataArray[editIndex].city = cityInput.value;
   dataArray[editIndex].country = countryInput.value;
