@@ -242,6 +242,7 @@ submitButton.addEventListener("click", () => {
       cleanInput();
     } else {
       editUser(usersData);
+      isEditing = false;
       cleanInput();
     }
   } else {
