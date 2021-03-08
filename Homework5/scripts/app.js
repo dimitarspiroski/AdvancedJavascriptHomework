@@ -59,8 +59,6 @@ let usersData = [
   new User("Bjorn", "Larsen", 31, "Oslo", "Norway", "Astrid Larsen", ["Einar"]),
 ];
 
-let usersDataCopy = usersData.slice();
-
 const inputData = [
   searchInput,
   firstNameInput,
@@ -120,7 +118,6 @@ function createUser(firstName, lastName, age, city, country, spouse, pets) {
     pets
   );
   usersData.push(newUser);
-  usersDataCopy.push(newUser);
   printUsers(usersData);
 }
 
@@ -163,7 +160,9 @@ function searchUser(input) {
       <td>${user.userID}</td>
       <td><span class="edit">Edit</span><span class="remove">X</span></td>
       </tr>`;
-      const foundUserIndex = usersData.findIndex(element => element === user);
+      const foundUserIndex = usersData.findIndex(
+        element => element.userID === user.userID
+      );
       editUserButtons(usersData);
       deleteUser(usersData, foundUserIndex);
     }
@@ -232,18 +231,20 @@ searchBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => printUsers(usersData));
 
 ascendBtn.addEventListener("click", () => {
-  usersData.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
-  printUsers(usersData);
+  const copyUserData = [...usersData];
+  copyUserData.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
+  printUsers(copyUserData);
 });
 
 descendBtn.addEventListener("click", () => {
-  usersData.sort((a, b) => (b.lastName > a.lastName ? 1 : -1));
-  printUsers(usersData);
+  const copyUserData = [...usersData];
+  copyUserData.sort((a, b) => (b.lastName > a.lastName ? 1 : -1));
+  printUsers(copyUserData);
 });
 
 resetSortBtn.addEventListener("click", () => {
   // sortReset = true;
-  printUsers(usersDataCopy);
+  printUsers(usersData);
 });
 
 submitButton.addEventListener("click", () => {
