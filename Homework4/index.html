@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 3 AJS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="nav-form">Register Form</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="nav-home">Table</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section id="form-section">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fname-input">First Name</label>
+            <input
+              type="email"
+              class="form-control"
+              id="fname-input"
+              placeholder="Required"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lname-input">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lname-input"
+              placeholder="Required"
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="age-input">Age</label>
+          <input
+            type="number"
+            class="form-control"
+            id="age-input"
+            placeholder="Required"
+            min="0"
+            max="150"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="city-input">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city-input"
+            placeholder="Required"
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="country-input">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="country-input"
+              placeholder="Required"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="spouse-input">Spouse</label>
+            <input type="text" class="form-control" id="spouse-input" />
+          </div>
+          <br />
+          <div class="input-group mb-3">
+            <label for="pets-input">Pets:</label>
+            <select multiple class="custom-select" id="pets-input">
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+              <option value="Fish">Fish</option>
+              <option value="Lizard">Lizard</option>
+              <option value="Snake">Snake</option>
+              <option value="Parrot">Parrot</option>
+              <option value="Other">Other</option>
+              <option value="None">None</option>
+            </select>
+            <div class="input-group-append"></div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-dark" id="submit-button">
+          Submit
+        </button>
+      </form>
+      <p id="error-message"></p>
+    </section>
+    <section id="table-section">
+      <div>
+        <table id="table" class="table table-dark table-hover">
+          <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Spouse</th>
+            <th>Pets</th>
+            <th>Marriage Status</th>
+            <th>User ID</th>
+            <th>Actions</th>
+          </thead>
+          <tbody id="table-container"></tbody>
+        </table>
+      </div>
+      <label for="search-input">Search User:</label>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Please enter a full name or an ID:"
+      />
+      <button type="button" id="search-btn" class="btn btn-dark">Search</button>
+      <button type="button" id="reset-btn" class="btn btn-dark">Reset</button>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./scripts/app.js"></script>
+  </body>
+</html>
