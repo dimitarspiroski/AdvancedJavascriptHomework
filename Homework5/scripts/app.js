@@ -80,7 +80,6 @@ const requiredInputs = [
 
 let editIndex = null;
 let isEditing = false;
-// let sortReset = false;
 
 // [Functions]
 function defaultPage() {
@@ -243,7 +242,6 @@ descendBtn.addEventListener("click", () => {
 });
 
 resetSortBtn.addEventListener("click", () => {
-  // sortReset = true;
   printUsers(usersData);
 });
 
@@ -263,11 +261,6 @@ submitButton.addEventListener("click", () => {
           .join()
       );
       cleanInput();
-      // } else if (sortReset && isEditing) {
-      //   editUser(usersDataCopy);
-      //   isEditing = false;
-      //   sortReset = false;
-      //   cleanInput();}
     } else {
       editUser(usersData);
       isEditing = false;

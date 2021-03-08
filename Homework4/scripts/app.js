@@ -156,7 +156,9 @@ function searchUser(input) {
       <td>${user.userID}</td>
       <td><span class="edit">Edit</span><span class="remove">X</span></td>
       </tr>`;
-      const foundUserIndex = usersData.findIndex(element => element === user);
+      const foundUserIndex = usersData.findIndex(
+        element => element.userID === user.userID
+      );
       editUserButtons(usersData);
       deleteUser(usersData, foundUserIndex);
     }
